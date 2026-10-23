@@ -21,8 +21,8 @@ public class TareaEvaluativa1_4 {
 
 		try (Connection con = DriverManager.getConnection(URL, USER, PASS)) {
            con.setAutoCommit(false);
-			//ejercicio1(con);
-			//ejercicio2(con, sc);
+			ejercicio1(con);
+			ejercicio2(con, sc);
 
         } catch (SQLException e) {
             System.err.println("No se pudo conectar: " + e.getMessage());
@@ -30,7 +30,7 @@ public class TareaEvaluativa1_4 {
 		// Ejercicio 3
 		try (Connection con = DriverManager.getConnection(URL, USER, PASS)) {
 	           con.setAutoCommit(false);
-				//ejercicio3(con, sc);
+				ejercicio3(con, sc);
         } catch (SQLException e) {
             System.err.println("No se pudo conectar: " + e.getMessage());
         }
@@ -224,6 +224,7 @@ public class TareaEvaluativa1_4 {
 		try (PreparedStatement ps = c.prepareStatement(queryExistePlazas)) {
 			ps.setInt(1, idCurso);
 			try (ResultSet rs = ps.executeQuery()) {
+				rs.next();
 				if (rs.getInt("capacidad") > rs.getInt("matriculas")) return true;
 				else return false;
 			}
